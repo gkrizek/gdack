@@ -10,7 +10,7 @@
 
 import sys
 import troposphere.apigateway as api
-from troposphere import GetAtt, Join, Parameter, Ref, Template, Tags
+from troposphere import GetAtt, Join, Parameter, Ref, Template, Tags, Output
 from troposphere.iam import Role, Policy
 from troposphere.awslambda import Function, Code, Environment, Permission
 from troposphere.route53 import RecordSetType, AliasTarget
@@ -39,7 +39,7 @@ lambdaBucket = t.add_parameter(Parameter(
 
 # Resources
 
-LambdaRole = t.add_resource(Role(
+lambdaRole = t.add_resource(Role(
     "LambdaRole",
     Path="/",
     RoleName="GDACK-LambdaRole",
@@ -72,7 +72,7 @@ LambdaRole = t.add_resource(Role(
     },
 ))
 
-ApiRole = t.add_resource(Role(
+apiRole = t.add_resource(Role(
     "ApiRole",
     Path="/",
     RoleName="GDACK-ApiRole",
@@ -150,7 +150,7 @@ apiMethod = t.add_resource(api.Method(
     )
 ))
 
-stage_name = "v1"
+stageName = "v1"
 
 apiDeployment = t.add_resource(api.Deployment(
     "apiDeployment",
@@ -160,7 +160,7 @@ apiDeployment = t.add_resource(api.Deployment(
 
 apiStage = t.add_resource(api.Stage(
     "apiStage",
-    StageName=stage_name,
+    StageName=stageName,
     RestApiId=Ref(restApi),
     DeploymentId=Ref(apiDeployment)
 ))
@@ -185,9 +185,9 @@ snsTopic = t.add_resource(Topic(
     ]
 ))
 
-ApiPermission = t.add_resource(awslambda.Permission(
+ApiPermission = t.add_resource(Permission(
     "ApiPermission",
-    FunctionName=Ref(LambdaFunction),
+    FunctionName=Ref(lambdaFunction),
     Action="lambda:InvokeFunction",
     Principal="apigateway.amazonaws.com"
 ))
@@ -197,10 +197,12 @@ ApiPermission = t.add_resource(awslambda.Permission(
 WebhookUrl = t.add_output(Output(
     "WebhookUrl",
     Description="URL for Slack Endpoint",
-    Value=Join("", [Ref(RestApi), ".execute-api.", Ref("AWS::Region"), ".amazonaws.com/", StageName, "/slack"])
+    Value=Join("", [Ref(restApi), ".execute-api.", Ref("AWS::Region"), ".amazonaws.com/", stageName, "/slack"])
 ))
 
 j = t.to_json()
 
 with open('gdack.template', 'w') as fd:
     fd.write(j)
+
+print("export complete")
