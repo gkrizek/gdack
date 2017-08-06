@@ -69,5 +69,5 @@ cf.update_stack(
 
 os.remove('./gdack.template')
 
-print("\nCloudFormation Successfully Started for "+env+"...\n")
+print("\nCloudFormation Successfully Started...\n")
 sys.exit(0)
