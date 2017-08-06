@@ -4,7 +4,7 @@
 
 This is a serverless application running in [AWS Lambda](https://aws.amazon.com/lambda/). Using the slash command `/gdax` you make buy, sell, or [HODL](https://www.reddit.com/r/Bitcoin/comments/2b8t78/whats_hodl/) from Slack.
 
-_Disclaimer: I am making this application for myself only. I need an easy way to buy and sell Bitcoins from my phone and GDAX doesn't have a mobile app. You are free to use my code, just beware I wrote this for my own use only._
+_Disclaimer: I am making this application for myself only. I need an easy way to buy and sell Bitcoins from my phone and GDAX doesn't have a mobile app. You are free to use my code, just beware that I didn't write this as a full 'application'._
 
 ## Commands:
 
