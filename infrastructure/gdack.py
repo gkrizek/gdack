@@ -95,9 +95,10 @@ apiRole = t.add_resource(Role(
             "Version": "2012-10-17",
             "Statement": [{
                 "Action": [
-                    "logs:Put*",
+                    "logs:*",
                     "lambda:Invoke*",
-                    "iam:PassRole"
+                    "iam:PassRole",
+                    "cloudwatch:*"
                 ],
                 "Resource": "*",
                 "Effect": "Allow"
@@ -106,10 +107,11 @@ apiRole = t.add_resource(Role(
     AssumeRolePolicyDocument={
         "Version": "2012-10-17",
         "Statement": [{
-            "Action": ["sts:AssumeRole"],
+            "Action": "sts:AssumeRole",
             "Effect": "Allow",
             "Principal": {
                 "Service": [
+                    "lambda.amazonaws.com",
                     "apigateway.amazonaws.com"
                 ]
             }
