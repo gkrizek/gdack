@@ -45,7 +45,7 @@ lambdaRole = t.add_resource(Role(
     RoleName="GDACK-LambdaRole",
     Policies=[
         Policy(
-            PolicyName="GDACK-LambdaPolicy",
+            PolicyName="GDACK-LambdaPolicy-Logs",
             PolicyDocument={
                 "Version": "2012-10-17",
                 "Statement": [{
@@ -53,6 +53,19 @@ lambdaRole = t.add_resource(Role(
                         "logs:*"
                     ],
                     "Resource": "arn:aws:logs:*:*:*",
+                    "Effect": "Allow"
+                }]
+            }
+        ),
+        Policy(
+            PolicyName="GDACK-LambdaPolicy-SSM",
+            PolicyDocument={
+                "Version": "2012-10-17",
+                "Statement": [{
+                    "Action": [
+                        "ssm:Get"
+                    ],
+                    "Resource": "*",
                     "Effect": "Allow"
                 }]
             }
@@ -139,7 +152,7 @@ apiMethod = t.add_resource(api.Method(
     ResourceId=Ref(apiResource),
     HttpMethod="ANY",
     Integration=api.Integration(
-        Credentials=GetAtt(lambdaRole, "Arn"),
+        Credentials=GetAtt(apiRole, "Arn"),
         Type="AWS_PROXY",
         IntegrationHttpMethod='ANY',
         Uri=Join("", [
