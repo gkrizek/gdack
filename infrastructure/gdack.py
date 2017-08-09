@@ -63,7 +63,7 @@ lambdaRole = t.add_resource(Role(
                 "Version": "2012-10-17",
                 "Statement": [{
                     "Action": [
-                        "ssm:Get"
+                        "ssm:Get*"
                     ],
                     "Resource": "*",
                     "Effect": "Allow"
