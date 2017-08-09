@@ -1,4 +1,5 @@
 import boto3
+from gdack import Router
 
 def handler(event, context):
 
@@ -15,12 +16,23 @@ def handler(event, context):
             name = value['Name'].split('/')[-1]
             os.environ[name] = value['Value']
 
-        return {
-            'statusCode': 200,
-            'body': str(event)
-        }
+        try:
+            result = Router(
+                headers=event['headers'],
+                body=event['body']
+            )
+            return {
+                'statusCode': 200,
+                'body': result
+            }
+        except KeyError:
+            return {
+                'statusCode': 400,
+                'body': 'Bad Request'
+            }
+
     else:
         return {
             'statusCode': 400,
-            'body': 'Nope'
+            'body': 'No Event Found'
         }
