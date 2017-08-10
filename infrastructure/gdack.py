@@ -159,7 +159,7 @@ apiMethod = t.add_resource(api.Method(
         IntegrationHttpMethod='ANY',
         Uri=Join("", [
             "arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/",
-            GetAtt("lambdaFunction", "Arn"),
+            GetAtt(lambdaFunction, "Arn"),
             "/invocations"
         ])
     )
@@ -204,7 +204,8 @@ ApiPermission = t.add_resource(Permission(
     "ApiPermission",
     FunctionName=Ref(lambdaFunction),
     Action="lambda:InvokeFunction",
-    Principal="apigateway.amazonaws.com"
+    Principal="apigateway.amazonaws.com",
+    SourceArn=Join("", ["arn:aws:execute-api:us-west-2:", Ref("AWS::AccountId"), ":", Ref(restApi), "/*/*/*"])
 ))
 
 # Output
