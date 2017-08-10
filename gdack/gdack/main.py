@@ -1,4 +1,4 @@
-from gdrack.slack import Reply, Comment
+from gdack.slack import Reply, Comment
 from gdack.utils import InvokeSelf
 from urllib.parse import parse_qs
 import json
@@ -13,42 +13,42 @@ def Router(headers, body):
         user_id = body['user_id'][0]
         user_name = body['user_name'][0]
         text = body['text'][0]
-        action = text.split(' ')[1]
+        action = text.split(' ')[0]
         response_url = body['response_url'][0]
 
         if action == 'account':
             result = Reply(
-                Channel=channel,
+                ResponseUrl=response_url,
                 Message="account"
             )
             print(result)
-        elif action = 'orders':
+        elif action == 'orders':
             result = Reply(
-                Channel=channel,
+                ResponseUrl=response_url,
                 Message="orders"
             )
             print(result)
-        elif action = 'create':
+        elif action == 'create':
             result = Reply(
-                Channel=channel,
+                ResponseUrl=response_url,
                 Message="create"
             )
             print(result)
-        elif action = 'price':
+        elif action == 'price':
             result = Reply(
-                Channel=channel,
-                Message="account"
+                ResponseUrl=response_url,
+                Message="price"
             )
             print(result)
-        elif action = 'status':
+        elif action == 'status':
             result = Reply(
-                Channel=channel,
-                Message="account"
+                ResponseUrl=response_url,
+                Message="status"
             )
             print(status)
         else:
             result = Reply(
-                Channel=channel,
+                ResponseUrl=response_url,
                 Message="Unknown"
             )
             print(result)
