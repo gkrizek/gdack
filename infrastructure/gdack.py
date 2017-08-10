@@ -69,6 +69,19 @@ lambdaRole = t.add_resource(Role(
                     "Effect": "Allow"
                 }]
             }
+        ),
+        Policy(
+            PolicyName="GDACK-LambdaPolicy-Invoke",
+            PolicyDocument={
+                "Version": "2012-10-17",
+                "Statement": [{
+                    "Action": [
+                        "lambda:Invoke*"
+                    ],
+                    "Resource": "*",
+                    "Effect": "Allow"
+                }]
+            }
         )
     ],
     AssumeRolePolicyDocument={

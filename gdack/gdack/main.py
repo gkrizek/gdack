@@ -19,7 +19,7 @@ def Router(headers, body):
                     body=body
                 )
                 return "Command Received..."
-            except e as Exception:
+            except Exception as e:
                 print(e)
                 return "There was a problem executing command:\n```" + str(e) + "```"
         else:

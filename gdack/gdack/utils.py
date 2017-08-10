@@ -1,5 +1,5 @@
 import boto3
-
+import json
 
 def InvokeSelf(body):
     awslambda = boto3.client('lambda')
@@ -10,7 +10,7 @@ def InvokeSelf(body):
         },
         'body': body
     }
-    
+
     result = awslambda.invoke(
         FunctionName="GDACK",
         InvocationType="Event",
