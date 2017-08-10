@@ -52,7 +52,7 @@ def Reply(ResponseUrl, Message, *args, **kwargs):
             }
         r = requests.post(ResponseUrl, json=data)
         if r.text != 'ok':
-            print(result)
+            print(r)
             return "Comment Failed"
         else:
             return "Comment Successful"

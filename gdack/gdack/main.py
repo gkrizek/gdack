@@ -47,9 +47,22 @@ def Router(headers, body):
             )
             print(status)
         else:
+            message = ("*Error:* Unknown Command.\nAvailable Commands:\n```" +
+                       "/gdack account list\n" +
+                       "/gdack account history <account_id>\n" +
+                       "/gdack orders list\n" +
+                       "/gdack orders cancel <order_id>\n" +
+                       "/gdack orders cancel all\n" +
+                       "/gdack create limit <side> <price> <size>\n" +
+                       "/gdack create market <side> <size>\n" +
+                       "/gdack create stop <side> <price> <size>\n" +
+                       "/gdack price\n" +
+                       "/gdack status```"
+                      )
+            print(message)
             result = Reply(
                 ResponseUrl=response_url,
-                Message="Unknown"
+                Message=message
             )
             print(result)
         return
