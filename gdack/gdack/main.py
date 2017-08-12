@@ -43,9 +43,17 @@ def Router(headers, body):
             )
             message = result
         elif action == "price":
-            message = "price"
+            result = Price(
+                Text=text,
+                Channel=channel_name,
+                User=user_name
+            )
         elif action == "status":
-            message = "status"
+            result = Status(
+                Text=text,
+                Channel=channel_name,
+                User=user_name
+            )
         elif action == "help":
             message = ("Available Commands:\n" +
                        "`/gdack account list`\n" +
