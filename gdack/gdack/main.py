@@ -36,7 +36,12 @@ def Router(headers, body):
             )
             message = result
         elif action == "create":
-            message = "create"
+            result = Create(
+                Text=text,
+                Channel=channel_name,
+                User=user_name
+            )
+            message = result
         elif action == "price":
             message = "price"
         elif action == "status":
