@@ -1,3 +1,4 @@
+from gdack.account import Account
 from gdack.slack import Reply, Comment
 from gdack.utils import InvokeSelf
 from urllib.parse import parse_qs
@@ -17,54 +18,53 @@ def Router(headers, body):
         response_url = body['response_url'][0]
 
         if action == 'account':
-            result = Reply(
-                ResponseUrl=response_url,
-                Message="account"
+            result = Account(
+                Text=text,
+                Channel=channel_name,
+                User=user_name
             )
-            print(result)
-        elif action == 'orders':
-            result = Reply(
-                ResponseUrl=response_url,
-                Message="orders"
-            )
-            print(result)
-        elif action == 'create':
-            result = Reply(
-                ResponseUrl=response_url,
-                Message="create"
-            )
-            print(result)
-        elif action == 'price':
-            result = Reply(
-                ResponseUrl=response_url,
-                Message="price"
-            )
-            print(result)
-        elif action == 'status':
-            result = Reply(
-                ResponseUrl=response_url,
-                Message="status"
-            )
-            print(status)
-        else:
-            message = ("*Error:* Unknown Command.\nAvailable Commands:\n```" +
-                       "/gdack account list\n" +
-                       "/gdack account history <account_id>\n" +
-                       "/gdack orders list\n" +
-                       "/gdack orders cancel <order_id>\n" +
-                       "/gdack orders cancel all\n" +
-                       "/gdack create limit <side> <price> <size>\n" +
-                       "/gdack create market <side> <size>\n" +
-                       "/gdack create stop <side> <price> <size>\n" +
-                       "/gdack price\n" +
-                       "/gdack status```"
+            message = result
+        elif action == "orders":
+            message = "orders"
+        elif action == "create":
+            message = "create"
+        elif action == "price":
+            message = "price"
+        elif action == "status":
+            message = "status"
+        elif action == "help":
+            message = ("Available Commands:\n" +
+                       "`/gdack account list`\n" +
+                       "`/gdack account history <account_id>`\n" +
+                       "`/gdack orders list`\n" +
+                       "`/gdack orders cancel <order_id>`\n" +
+                       "`/gdack orders cancel all`\n" +
+                       "`/gdack create limit <side> <price> <size>`\n" +
+                       "`/gdack create market <side> <size>`\n" +
+                       "`/gdack create stop <side> <price> <size>`\n" +
+                       "`/gdack price`\n" +
+                       "`/gdack status`\n" +
+                       "`/gdack help`"
                       )
-            print(message)
-            result = Reply(
-                ResponseUrl=response_url,
-                Message=message
-            )
-            print(result)
+        else:
+            message = ("*Error:* Unknown Command.\nAvailable Commands:\n" +
+                       "`/gdack account list`\n" +
+                       "`/gdack account history <account_id>`\n" +
+                       "`/gdack orders list`\n" +
+                       "`/gdack orders cancel <order_id>`\n" +
+                       "`/gdack orders cancel all`\n" +
+                       "`/gdack create limit <side> <price> <size>`\n" +
+                       "`/gdack create market <side> <size>`\n" +
+                       "`/gdack create stop <side> <price> <size>`\n" +
+                       "`/gdack price`\n" +
+                       "`/gdack status`\n" +
+                       "`/gdack help`"
+                      )
+        result = Reply(
+            ResponseUrl=response_url,
+            Message=message
+        )
+        print(result)
         return
 
     else:
