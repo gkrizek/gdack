@@ -20,7 +20,7 @@ def Orders(Text, Channel, User):
                                "Example: `/gdack orders cancel abc123`"
                               )
                 else:
-                    if text.split(' ')[2] == 'all'
+                    if text.split(' ')[2] == 'all':
                         message = "this is the order cancel all command"
                     else:
                         message = "this is the order cancel id command"
