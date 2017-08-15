@@ -2,7 +2,7 @@
 
 def Status(Text, Channel, User):
     try:
-        message = "this is the statys command"
+        message = "<https://status.gdax.com|GDAX Staus>"
     except Exception as e:
         print(e)
         message = "*Error:* There was a problem running that command:\n```" + str(e) + "```"
