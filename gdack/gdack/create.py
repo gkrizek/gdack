@@ -17,7 +17,7 @@ def Create(Text, Channel, User):
                 if len(text.split(' ')) < 5:
                     message = ("*Error:* Side, Price, and Size are required.\n" +
                                "Example:\n" +
-                               "`/gdack limit buy 2500.00 0.125`"
+                               "`/gdack create limit buy 2500.00 0.125`"
                               )
                 else:
                     side = text.split(' ')[2]
@@ -35,7 +35,7 @@ def Create(Text, Channel, User):
                 if len(text.split(' ')) < 4:
                     message = ("*Error:* Side and Size are required.\n" +
                                "Example:\n" +
-                               "`/gdack market buy 0.125`"
+                               "`/gdack create market buy 0.125`"
                               )
                 else:
                     side = text.split(' ')[2]
@@ -49,7 +49,7 @@ def Create(Text, Channel, User):
                 if len(text.split(' ')) < 5:
                     message = ("*Error:* Side, Price, and Size are required.\n" +
                                "Example:\n" +
-                               "`/gdack stop buy 2500.00 0.125`"
+                               "`/gdack create stop buy 2500.00 0.125`"
                               )
                 else:
                     side = text.split(' ')[2]

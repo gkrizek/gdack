@@ -48,12 +48,14 @@ def Router(headers, body):
                 Channel=channel_name,
                 User=user_name
             )
+            message = result
         elif action == "status":
             result = Status(
                 Text=text,
                 Channel=channel_name,
                 User=user_name
             )
+            message = result
         elif action == "help":
             message = ("Available Commands:\n" +
                        "`/gdack account list`\n" +
